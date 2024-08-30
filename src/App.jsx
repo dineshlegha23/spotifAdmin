@@ -11,14 +11,17 @@ import Sidebar from "./components/Sidebar";
 
 const App = () => {
   return (
-    <div className="flex">
+    <div className="flex bg-zinc-100 cursor-default">
       <ToastContainer />
       <Sidebar />
-      <div className="flex flex-col">
-        Admin panel
+      <div className="flex flex-col pl-10">
+        <div className="w-[calc(100vw-400px)] mt-6">
+          <h3 className="text-2xl mb-4">Admin Panel</h3>
+          <hr className="border-[1px] mb-4" />
+        </div>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/add-song" element={<AddSong />} />
+          <Route path="/add-song" index element={<AddSong />} />
           <Route path="/all-songs" element={<ListSong />} />
           <Route path="/add-album" element={<AddAlbum />} />
           <Route path="/all-albums" element={<ListAlbum />} />
