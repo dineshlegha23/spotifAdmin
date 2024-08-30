@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 import axios from "axios";
 import Song from "../components/Song";
+import { toast } from "react-toastify";
 
 const ListSong = () => {
   const [songs, setSongs] = useState();
@@ -9,6 +10,22 @@ const ListSong = () => {
   const fetchSongs = async () => {
     const response = await axios("http://localhost:5000/api/v1/songs");
     setSongs(response.data.data);
+  };
+
+  const deleteSong = async (id) => {
+    console.log({ id });
+
+    try {
+      const response = await axios.delete(
+        "http://localhost:5000/api/v1/songs",
+        { data: { id } }
+      );
+      toast.success(response.data.msg);
+      console.log(response);
+      fetchSongs();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -29,7 +46,7 @@ const ListSong = () => {
         <div>
           {songs &&
             songs.map((song) => {
-              return <Song {...song} key={song._id} />;
+              return <Song {...song} key={song._id} deleteSong={deleteSong} />;
             })}
         </div>
       </div>

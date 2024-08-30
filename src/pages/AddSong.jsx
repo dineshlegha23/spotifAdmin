@@ -47,7 +47,7 @@ const AddSong = () => {
   };
 
   return (
-    <section className="pl-20">
+    <section>
       <form
         encType="multipart/form-data"
         onSubmit={handleSubmit}
