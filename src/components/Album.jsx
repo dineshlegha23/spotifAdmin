@@ -1,7 +1,7 @@
 import React from "react";
 import { assets } from "../assets/assets";
 
-const Album = ({ _id: id, name, color, image, deleteAlbum }) => {
+const Album = ({ _id: id, name, desc, bgcolor, image, deleteAlbum }) => {
   return (
     <div className="grid grid-cols-[1fr_3fr_2fr_1fr_1fr] items-center pl-2 border py-2">
       <img
@@ -11,7 +11,7 @@ const Album = ({ _id: id, name, color, image, deleteAlbum }) => {
       />
       <p>{name}</p>
       <p className="text-zinc-500">{desc}</p>
-      <input type="color" value={color} />
+      <input type="color" defaultValue={bgcolor} />
       <p className="pl-4 cursor-pointer" onClick={() => deleteAlbum(id)}>
         X
       </p>

@@ -8,7 +8,7 @@ const AddAlbum = () => {
   const [image, setImage] = useState();
   const [desc, setDesc] = useState("");
   const [name, setName] = useState("");
-  const [color, setColor] = useState("#000000");
+  const [bgColor, setColor] = useState("#000000");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ const AddAlbum = () => {
       formData.append("name", name);
       formData.append("desc", desc);
       formData.append("image", image);
-      formData.append("bgColor", color);
+      formData.append("bgcolor", bgColor);
 
       const response = await axios.post(
         "http://localhost:5000/api/v1/albums",
@@ -87,15 +87,15 @@ const AddAlbum = () => {
         className="py-1 pl-1 rounded-md mt-1"
       />
 
-      <label htmlFor="color" className="mt-5">
+      <label htmlFor="bgColor" className="mt-5">
         Background color
       </label>
       <input
         type="color"
-        name="color"
-        id="color"
+        name="bgColor"
+        id="bgColor"
         style={{ border: 0 }}
-        value={color}
+        value={bgColor}
         onChange={(e) => setColor(e.target.value)}
       />
 
