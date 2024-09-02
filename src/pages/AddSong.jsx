@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiSquarePlus } from "react-icons/ci";
 import { MdAudiotrack } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ const AddSong = () => {
   const [singers, setSingers] = useState("");
   const [image, setImage] = useState("");
   const [album, setAlbum] = useState("Album 1");
+  const [albums, setAlbums] = useState([]);
   const [audio, setAudio] = useState("");
 
   const handleSubmit = async (e) => {
@@ -45,6 +46,16 @@ const AddSong = () => {
       console.log(err);
     }
   };
+
+  const fetchAlbums = async () => {
+    const response = await axios("http://localhost:5000/api/v1/albums");
+    setAlbums(response.data.data);
+    console.log(response.data.data);
+  };
+
+  useEffect(() => {
+    fetchAlbums();
+  }, []);
 
   return (
     <section>
@@ -140,9 +151,13 @@ const AddSong = () => {
           value={album}
           onChange={(e) => setAlbum(e.target.value)}
         >
-          <option value="album 1">album 1</option>
-          <option value="album 2">album 2</option>
+          {albums.map((album) => (
+            <option key={album._id} value={album._id}>
+              {album.name}
+            </option>
+          ))}
         </select>
+
         {loading && (
           <div className="fixed inset-0 grid place-items-center bg-zinc-200/50 h-screen w-screen">
             <svg
