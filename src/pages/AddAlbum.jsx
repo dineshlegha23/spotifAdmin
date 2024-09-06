@@ -22,7 +22,7 @@ const AddAlbum = () => {
       formData.append("bgcolor", bgColor);
 
       const response = await axios.post(
-        "http://localhost:5000/api/v1/albums",
+        "https://spotif-backend.onrender.com/api/v1/albums",
         formData
       );
       if (response.status === 200) {

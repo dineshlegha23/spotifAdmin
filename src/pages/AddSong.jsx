@@ -30,7 +30,7 @@ const AddSong = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:5000/api/v1/songs",
+        "https://spotif-backend.onrender.com/api/v1/songs",
         formData,
         {
           onUploadProgress: (progressEvent) => {
@@ -55,7 +55,9 @@ const AddSong = () => {
   };
 
   const fetchAlbums = async () => {
-    const response = await axios("http://localhost:5000/api/v1/albums");
+    const response = await axios(
+      "https://spotif-backend.onrender.com/api/v1/albums"
+    );
     setAlbums(response.data.data);
   };
 

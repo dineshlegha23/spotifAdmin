@@ -8,7 +8,9 @@ const ListSong = () => {
   const [songs, setSongs] = useState();
 
   const fetchSongs = async () => {
-    const response = await axios("http://localhost:5000/api/v1/songs");
+    const response = await axios(
+      "https://spotif-backend.onrender.com/api/v1/songs"
+    );
     setSongs(response.data.data);
   };
 
@@ -17,7 +19,7 @@ const ListSong = () => {
 
     try {
       const response = await axios.delete(
-        "http://localhost:5000/api/v1/songs",
+        "https://spotif-backend.onrender.com/api/v1/songs",
         { data: { id } }
       );
       toast.success(response.data.msg);

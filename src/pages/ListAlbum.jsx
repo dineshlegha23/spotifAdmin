@@ -8,7 +8,9 @@ const ListAlbum = () => {
 
   const fetchAlbums = async () => {
     try {
-      const response = await axios("http://localhost:5000/api/v1/albums");
+      const response = await axios(
+        "https://spotif-backend.onrender.com/api/v1/albums"
+      );
       console.log(response.data.data);
 
       setAlbums(response.data.data);
@@ -23,7 +25,7 @@ const ListAlbum = () => {
 
     try {
       const response = await axios.delete(
-        "http://localhost:5000/api/v1/albums",
+        "https://spotif-backend.onrender.com/api/v1/albums",
         { data: { id } }
       );
       toast.success(response.data.msg);
