@@ -14,6 +14,7 @@ const AddSong = () => {
   const [album, setAlbum] = useState("Album 1");
   const [albums, setAlbums] = useState([]);
   const [audio, setAudio] = useState("");
+  const [progress, setProgress] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +31,13 @@ const AddSong = () => {
       setLoading(true);
       const response = await axios.post(
         "http://localhost:5000/api/v1/songs",
-        formData
+        formData,
+        {
+          onUploadProgress: (progressEvent) => {
+            console.log(progressEvent.progress * 100),
+              setProgress(Math.floor(progressEvent.progress * 100));
+          },
+        }
       );
       toast.success(response.data.msg);
       setLoading(false);
@@ -50,7 +57,6 @@ const AddSong = () => {
   const fetchAlbums = async () => {
     const response = await axios("http://localhost:5000/api/v1/albums");
     setAlbums(response.data.data);
-    console.log(response.data.data);
   };
 
   useEffect(() => {
@@ -176,6 +182,13 @@ const AddSong = () => {
                 fill="currentFill"
               />
             </svg>
+            {progress !== null && progress < 100 && (
+              <progress
+                max={100}
+                value={progress}
+                className="-mt-52"
+              ></progress>
+            )}
           </div>
         )}
         <button
